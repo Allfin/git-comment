@@ -152,3 +152,125 @@ chore(deps): update axios to version 1.2.3
 ```
 
 Dengan mengikuti konvensi ini, riwayat commit Anda akan lebih rapi, profesional, dan mudah dikelola! 🚀
+
+
+Gambar tersebut menampilkan daftar anotasi (annotations) yang umum digunakan dalam pengembangan aplikasi berbasis Spring Boot. Berikut penjelasan masing-masing anotasi:
+
+---
+
+### **1. `@CrossOrigin`**
+- **Fungsi**: Digunakan untuk mengatur Cross-Origin Resource Sharing (CORS). Anotasi ini memungkinkan atau membatasi permintaan dari domain yang berbeda.
+- **Contoh**:
+  ```java
+  @CrossOrigin(origins = "http://example.com")
+  @GetMapping("/data")
+  public String getData() {
+      return "Hello!";
+  }
+  ```
+
+---
+
+### **2. `@RestController`**
+- **Fungsi**: Kombinasi dari `@Controller` dan `@ResponseBody`. Anotasi ini menandai bahwa class merupakan RESTful controller, dan setiap metode di dalamnya akan mengembalikan data (bukan view).
+- **Contoh**:
+  ```java
+  @RestController
+  public class MyController {
+      @GetMapping("/hello")
+      public String sayHello() {
+          return "Hello, World!";
+      }
+  }
+  ```
+
+---
+
+### **3. `@PatchMapping`**
+- **Fungsi**: Digunakan untuk menangani permintaan HTTP dengan metode PATCH, yang biasanya digunakan untuk memperbarui sebagian data dari sebuah resource.
+- **Contoh**:
+  ```java
+  @PatchMapping("/update/{id}")
+  public String updatePartialData(@PathVariable int id, @RequestBody Map<String, Object> updates) {
+      // Logika update data
+      return "Data updated";
+  }
+  ```
+
+---
+
+### **4. `@GetMapping`**
+- **Fungsi**: Digunakan untuk menangani permintaan HTTP dengan metode GET. Cocok untuk membaca atau mengambil data.
+- **Contoh**:
+  ```java
+  @GetMapping("/users")
+  public List<User> getUsers() {
+      return userService.getAllUsers();
+  }
+  ```
+
+---
+
+### **5. `@PutMapping`**
+- **Fungsi**: Digunakan untuk menangani permintaan HTTP dengan metode PUT. Biasanya untuk mengganti data secara penuh pada resource tertentu.
+- **Contoh**:
+  ```java
+  @PutMapping("/update/{id}")
+  public String updateData(@PathVariable int id, @RequestBody User user) {
+      // Logika update
+      return "Data replaced";
+  }
+  ```
+
+---
+
+### **6. `@DeleteMapping`**
+- **Fungsi**: Digunakan untuk menangani permintaan HTTP dengan metode DELETE, biasanya untuk menghapus resource tertentu.
+- **Contoh**:
+  ```java
+  @DeleteMapping("/delete/{id}")
+  public String deleteData(@PathVariable int id) {
+      return "Data deleted";
+  }
+  ```
+
+---
+
+### **7. `@PathVariable`**
+- **Fungsi**: Digunakan untuk menangkap variabel yang dikirim sebagai bagian dari URL.
+- **Contoh**:
+  ```java
+  @GetMapping("/user/{id}")
+  public User getUserById(@PathVariable int id) {
+      return userService.findById(id);
+  }
+  ```
+
+---
+
+### **8. `@RequestBody`**
+- **Fungsi**: Digunakan untuk memetakan isi body dari permintaan HTTP ke dalam object Java.
+- **Contoh**:
+  ```java
+  @PostMapping("/create")
+  public User createUser(@RequestBody User user) {
+      return userService.save(user);
+  }
+  ```
+
+---
+
+### **9. `@RequestParam`**
+- **Fungsi**: Digunakan untuk menangkap parameter query string dari URL.
+- **Contoh**:
+  ```java
+  @GetMapping("/search")
+  public List<User> searchUsers(@RequestParam String name) {
+      return userService.searchByName(name);
+  }
+  ```
+
+---
+
+### **Kesimpulan**
+Anotasi-anotasi ini digunakan untuk mempermudah pengembangan aplikasi RESTful di Spring Boot. Dengan menggunakan anotasi ini, Anda dapat menangani berbagai jenis permintaan HTTP dan memetakan data antara client dan server dengan mudah.
